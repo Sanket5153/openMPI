@@ -1,0 +1,56 @@
+#!/bin/bash
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+NOCOLOR="\033[0m"
+
+
+echo -e "step 1: ${GREEN}Updating linux wait ...${NOCOLOR}"
+sudo apt-get update
+
+echo
+
+echo -e "step 2: ${GREEN}Now upgrading${NOCOLOR}"
+sudo apt-get upgrade
+
+echo
+
+echo -e "step 3: ${GREEN}Intalling our MPI pkg..${NOCOLOR}"
+sudo wget https://www.open-mpi.org/software/ompi/v4.1/downloads/openmpi-4.1.1.tar.gz
+
+echo
+
+echo -e "step 4: ${GREEN}Unpacking our MPI..${NOCOLOR}"
+sudo tar  -xvzf /home/hpcap/Downloads/openmpi-4.1.1.tar.gz
+
+echo
+
+echo -e "step 5: ${GREEN}Tension mat le I am doing properly ..${NOCOLOR}"
+cd openmpi-4.1.1/
+
+echo
+
+echo -e "step 6: ${GREEN}Doing configure ..${NOCOLOR}"
+sudo ./configure --prefix="/home/hpcap/Downloads/.openmpi"
+
+echo
+
+echo -e "step 7: ${GREEN}Installing Make..${NOCOLOR}"
+sudo make install
+
+echo
+
+echo -e "step 8: ${GREEN}Doing Magic..${NOCOLOR}"
+sudo make
+
+echo
+
+echo -e "step 9: ${GREEN}Almost Done..${NOCOLOR}"
+export PATH="$PATH:/home/hpcap/Downloads/.openmpi/bin"
+export PATH="$PATH:/home/hpcap/Downloads/.openmpi/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/hpcap/Downloads/.openmpi/lib"
+
+echo
+
+
+echo -e "step 10: ${GREEN}Ho gaya BHAI Tera Kam....${NOCOLOR}"
+sudo apt install mpirun-bin
